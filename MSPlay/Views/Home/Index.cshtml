@@ -3,19 +3,9 @@
 }
 @if (Request.IsAuthenticated)
 {
-    <!-- If the user is not authenticated, display the sign-in button -->
-
-
     <div class="WelcomeText">
         <h2><b>Welcome, @System.Security.Claims.ClaimsPrincipal.Current.FindFirst("name").Value</b></h2>
     </div>
-    @*<br />
-    <br />
-    @.ActionLink("See Your Claims", "Index", "Claims")
-    <br />
-    <br />*@
-    
-
 
 <div class="jumbotron">
     <h1 style="color: steelblue;margin-top: 45px;"><b>MS Play</b></h1>
@@ -56,6 +46,18 @@
     </div>
     <div class="col-md-4">
         <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Carrom" style="background-image: url('../../Images/Carrom.jpg')"><span class="GameSelect">Carrom</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p>
+            <a class="btn btn-default divImage" style="background-image: url('../../Images/gym.jpg')">
+                <span class="GameSelect">
+                    Gym<br><span style="font-size: 29px;">
+                        Current capacity : 10<span>
+                        </span>
+                    </span>
+                </span>
+            </a>
+        </p>
     </div>
 </div>
 }

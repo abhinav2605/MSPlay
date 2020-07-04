@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<MSPlay.Models.VenueDetails>
+   
 
 @*@Html.AntiForgeryToken()*@
+
+@{ 
+    IEnumerable<MSPlay.Models.Equipment> equipment = ViewBag.EquipmentList as IEnumerable<MSPlay.Models.Equipment>;
+}
 <h2>Book Now</h2>
 <hr />
 <table class="tblBook">
@@ -42,16 +47,20 @@
             <button class="collapsible">Select Equipment if required</button>
             <div class="content">
                 <table class="equipmentArea">
+                    @foreach (var item in equipment)
+                    {
                     <tr>
                         <td>
-                            <label>TT Bat</label>
+                            <label>@item.Name</label>
                         </td>
                         <td>
                             <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
                             <input type="number" id="number" value="0" />
                             <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                            <label style="margin-left: 20px;">@item.Quantity</label>
                         </td>
                     </tr>
+                    }
                 </table>
             </div>
         </td>

@@ -5,13 +5,12 @@ using System.Web;
 
 namespace MSPlay.Models
 {
-    public class VenueDetails
+    public class Equipment
     {
         public int ID { get; set; }
-        public string VenueName { get; set; }
-        public string VenueID { get; set; }
+        public string Name { get; set; }
         public string Category { get; set; }
-        public List<VenueDetails> GetVenueList { get; set; }
+        public int Quantity { get; set; }
         public List<Equipment> GetEquipmentList { get; set; }
     }
 }

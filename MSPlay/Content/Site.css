@@ -48,7 +48,7 @@ textarea {
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    height: 101%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -79,8 +79,10 @@ textarea {
     }
 .bookNow {
     display: inline-block;
-    border-radius: 4px;
     background: steelblue;
+    border-radius:5px;
+    background-image: linear-gradient(#09165a,#65a5f9);
+    box-shadow: 0px 1px 4px -2px #333;
     border: none;
     color: #FFFFFF;
     text-align: center;
@@ -93,6 +95,15 @@ textarea {
     vertical-align: middle;
     position: absolute;
     top: 50%;
+}
+.bookNow:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: 50%;
+    background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
 }
 
     .bookNow span {
@@ -139,13 +150,16 @@ textarea {
 }
 .btn-game > p > a {
     font-size: 1.5em;
+    background-image: linear-gradient(lightgrey,white);
 }
-.btn-game{
-    -moz-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
-    -webkit-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
-    box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    .btn-game :after {
+        background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    }
+.btn-game {
+    
     text-shadow: 1px 1px 2px rgba(000,000,000,0.7), 0px 1px 0px rgba(255,255,255,0.4);
 }
+ 
 .divImage:hover {
 /*    color: darkblue;*/
     -webkit-text-stroke: 1px black;
@@ -239,7 +253,7 @@ input[type=submit] {
     border-radius:10px;
 }
 .collapsible {
-    background-color: #777;
+    background-color: #5f79ce;
     color: white;
     cursor: pointer;
     padding: 5px;
@@ -251,10 +265,6 @@ input[type=submit] {
     margin-top: 6px;
     border-radius: 5px;
 }
-
-    .active, .collapsible:hover {
-        background-color: #555;
-    }
 
     .collapsible:after {
         content: '\002B';
@@ -286,11 +296,11 @@ input[type=submit] {
 input#number {
     text-align: center;
     border: none;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
+    border-radius:1px;
     margin: 0px;
     width: 40px;
-    height: 40px;
+    height: 34px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -303,11 +313,11 @@ input[type=number]::-webkit-outer-spin-button {
     display: inline-block;
     border: 1px solid #ddd;
     margin: 0px;
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 34px;
     text-align: center;
     vertical-align: middle;
-    padding: 11px 0;
+    padding: 5px 0;
     background: #eee;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -320,3 +330,12 @@ input[type=number]::-webkit-outer-spin-button {
     .value-button:hover {
         cursor: pointer;
     }
+.gameHeading {
+    background: #dff0d8; /*linear-gradient(180deg, #dff0d8 -25%, transparent);*/
+    opacity:70%;
+    width: fit-content;
+    height: 58px;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

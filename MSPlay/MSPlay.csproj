@@ -182,6 +182,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\VenueDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Images\Football.jpg" />
     <Content Include="Images\grass.jpg" />
     <Content Include="Images\grass1.jpg" />
+    <Content Include="Images\gym.jpg" />
     <Content Include="Images\pool.jpg" />
     <Content Include="Images\xbox.jpg" />
     <Content Include="Images\volleyball.jpg" />

@@ -58,6 +58,7 @@ namespace MSPlay.Controllers
         public ActionResult GetModalData(string category)
         {
             VenueDetails objVenue = new VenueDetails();
+            Equipment equipment = new Equipment();
             DataSet ds = new DataSet();
             string connStr = ConfigurationManager.ConnectionStrings["myConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connStr))
@@ -70,6 +71,7 @@ namespace MSPlay.Controllers
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(ds);
                     List<VenueDetails> userlist = new List<VenueDetails>();
+                    List<Equipment> equipmentList = new List<Equipment>();
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         VenueDetails uobj = new VenueDetails();
@@ -80,18 +82,24 @@ namespace MSPlay.Controllers
                         userlist.Add(uobj);
                     }
                     objVenue.GetVenueList = userlist;
+
+                    for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+                    {
+                        Equipment objEquipment = new Equipment();
+                        objEquipment.ID = Convert.ToInt32(ds.Tables[1].Rows[i]["ID"].ToString());
+                        objEquipment.Name= ds.Tables[1].Rows[i]["Name"].ToString();
+                        objEquipment.Category = ds.Tables[1].Rows[i]["Category"].ToString();
+                        objEquipment.Quantity = Convert.ToInt32(ds.Tables[1].Rows[i]["Quantity"].ToString());
+                        equipmentList.Add(objEquipment);
+                    }
+                    ViewBag.EquipmentList = equipmentList;
                 }
                 con.Close();
-                SelectList Place = new SelectList(objVenue.GetVenueList, "ID", "VenueDetails");
-                ViewBag.VenueList = Place;
             }
             var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
             string alias;
             //You get the user’s first and last name below:
             ViewBag.Name = userClaims?.FindFirst("name")?.Value;
-
-            // The 'preferred_username' claim can be used for showing the username
-            //
             alias = userClaims?.FindFirst("preferred_username")?.Value;
             ViewBag.Username = alias.Remove(alias.Length - 14, 14);
             return PartialView("~/Views/Games/_getModalData.cshtml", objVenue.GetVenueList);
