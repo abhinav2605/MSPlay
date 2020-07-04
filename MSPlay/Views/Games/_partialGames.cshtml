@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MSPlay.Models.Booking>
+    <script>
+        var cat = $('#category').val();
+    </script>
+@if (Model.Count() > 0)
+{
+<table class="table">
+
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.VenueID)
+               </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeAlias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OutTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th></th>
+    </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                        @Html.DisplayFor(m => item.VenueID)
+                </td>*@
+            <td>
+                @Html.DisplayFor(m => item.EmployeeAlias)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.InTime)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.OutTime)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.EmployeeName)
+            </td>
+            
+            <td>
+                @if (item.EmployeeName == System.Security.Claims.ClaimsPrincipal.Current.FindFirst("name").Value)
+                {
+                    <a class="delete" id="@item.SlNo" value="@item.VenueID">Delete</a>
+                }
+            </td>
+            
+        </tr>
+    }
+</table>
+}
+else
+{
+    <hr />
+    <h4>No active records found.</h4>
+}
+<script>
+    $('.delete').click(function () {
+
+        $.ajax({
+            url: "@(Url.Action("Delete", "Games"))",
+            method: 'get',
+            data: {
+                "ID": $(this).attr('id'),
+                "game": $(this).attr('value')
+            },
+            success: function (data) {
+                var modal = document.getElementById("myModal");
+                $("#ListRenderer").empty().append(data);
+                $('.modal-content').css("width","80%");
+                modal.style.display = "block";
+            }
+        });
+    });
+</script>
+
+

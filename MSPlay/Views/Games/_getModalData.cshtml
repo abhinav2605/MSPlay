@@ -1,0 +1,130 @@
+﻿@model IEnumerable<MSPlay.Models.VenueDetails>
+
+@*@Html.AntiForgeryToken()*@
+<h2>Book Now</h2>
+<hr />
+<table class="tblBook">
+    <tr>
+        <td><label for="Place">Place</label></td>
+        <td>
+            <select id="country" name="country">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.VenueID">@item.VenueName</option>
+                }
+            </select>
+        </td>
+    </tr>
+    <br />
+
+    <tr>
+        <td><label for="inTime">In Time</label></td>
+        <td><input type="text" id="inTime" class="timepicker" name="inTime"></td>
+    </tr>
+    <br />
+    <tr>
+        <td><label for="outTime">Out Time</label></td>
+        <td><input type="text" id="outTime" class="timepicker" name="outTime"></td>
+    </tr>
+
+    <br />
+    <tr>
+        <td><label for="Alias">Alias</label></td>
+        <td><input type="text" disabled id="Alias" name="Alias" value="@ViewBag.Username"></td>
+    </tr>
+    <br />
+    <tr>
+        <td><label for="ID">Name</label></td>
+        <td><input type="text" disabled id="ID" name="ID" value="@ViewBag.Name"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button class="collapsible">Select Equipment if required</button>
+            <div class="content">
+                <table class="equipmentArea">
+                    <tr>
+                        <td>
+                            <label>TT Bat</label>
+                        </td>
+                        <td>
+                            <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                            <input type="number" id="number" value="0" />
+                            <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <br />
+    <tr>
+        <td></td>
+        <td><input id="submit" type="submit" value="Submit"></td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+
+    function increaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+    }
+
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+    }
+
+
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+    function dateValidator() {
+        return $('#inTime').val() >= $('#outTime').val();
+    }
+    $("#submit").click(function () {
+        if (dateValidator() != true) {
+            $.ajax({
+                url: "@(Url.Action("AddBooking", "Games"))",
+                method: 'get',
+                data: {
+                    "VenueID": $('#country').val(),
+                    "inTime": $('#inTime').timepicker('getTime').toUTCString(),
+                    "outTime": $('#outTime').timepicker('getTime').toUTCString(),
+                    "Alias": $('#Alias').val(),
+                    "ID": $('#ID').val()
+                },
+                success: function (data) {
+                    if (data == 'entry added') {
+                        $('#ListRenderer1').empty();
+                        $('#addModal').css("display", "none");
+                        alert("Congratulations! Booking added successfully.");
+                    }
+                    else
+                        alert('Time slot not available!');
+                }
+            });
+        }
+        else
+            alert("Choose a valid time range.");
+    });
+</script>
+
+
+

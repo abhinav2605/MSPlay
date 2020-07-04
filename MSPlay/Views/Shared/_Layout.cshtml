@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Game - MS Play</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
+    <script src="~/Content/jquery.timepicker.js"></script>
+</head>
+<body>
+    <input type="hidden" value="" id="image" />
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("MS PLAY", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("History", "MyBooking", "Home")</li>
+                    <li>@Html.ActionLink("Sign out", "SignOut", "Home")</li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    @*<div class="footer-content">*@
+  
+
+    <div class="footer">
+        <p>&copy; @DateTime.Now.Year - Powered by Abhi</p>
+    </div>
+    @*</div>*@
+</div>
+
+
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+
+</body>
+</html>
+<script type="text/javascript">
+    var modal = document.getElementById("myModal");
+    var modal1 = document.getElementById("addModal");
+
+    function setTimePicker() {
+        var minutes = new Date().getMinutes();
+        var hours = new Date().getHours();
+        if (minutes <= 30)
+            minutes = 30;
+        else {
+            minutes = 0;
+            hours += 1;
+        }
+        var calcDate = new Date();
+        calcDate.setHours(hours);
+        calcDate.setMinutes(minutes);
+        $('#inTime').timepicker({
+            'minTime': calcDate,
+            'showDuration': true
+        });
+        $('#outTime').click(function () {
+            $(this).timepicker({
+                'minTime': $('#inTime').timepicker('getTime')
+
+            });
+        });
+    }
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    var span1 = document.getElementsByClassName("close1")[0];
+
+// When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    span1.onclick = function () {
+        modal1.style.display = "none";
+    }
+    $('div.btn-game > p > a').click(function () {
+        //ajax call to get data.
+        $.ajax({
+            url: "@(Url.Action("getData", "Games"))",
+            method: 'get',
+            data: { "gameID": this.name },
+            success: function (data) {
+                $("#ListRenderer").append(data);
+                $('.modal-content').css("width","80%");
+                modal.style.display = "block";
+            }
+        });
+
+    });
+     $('.close').click(function () {
+        $("#ListRenderer").empty();
+     });
+
+    var addModal = document.getElementById("addModal");
+    $(".bookNow").click(function () {
+        $.ajax({
+            url: "@(Url.Action("GetModalData", "Games"))",
+            method: 'get',
+            data: { "category": $('#category').val() },
+            success: function (data) {
+                $("#ListRenderer1").append(data);
+                addModal.style.display = "block";
+                $('.modal-content').css("margin-top", "76px").css("width","max-content");
+                setTimePicker();
+            }
+        });
+    });
+    $('.close1').click(function () {
+        $("#ListRenderer1").empty();
+    });
+</script>

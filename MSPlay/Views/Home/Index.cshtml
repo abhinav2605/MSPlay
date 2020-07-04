@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@if (Request.IsAuthenticated)
+{
+    <!-- If the user is not authenticated, display the sign-in button -->
+
+
+    <div class="WelcomeText">
+        <h2><b>Welcome, @System.Security.Claims.ClaimsPrincipal.Current.FindFirst("name").Value</b></h2>
+    </div>
+    @*<br />
+    <br />
+    @.ActionLink("See Your Claims", "Index", "Claims")
+    <br />
+    <br />*@
+    
+
+
+<div class="jumbotron">
+    <h1 style="color: steelblue;margin-top: 45px;"><b>MS Play</b></h1>
+    <span class="lead">Time to stretch your legs. Take a break. </span>
+    <p style=" margin-top: 12px;"><a href="/Home/About" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage tableTennis" href="/Games/GoToGame?game=Table Tennis"><span class="GameSelect">Table Tennis</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Cricket" style="background-image: url('../Images/Cricket.jpg')"><span class="GameSelect">Cricket</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Volleyball" style="background-image: url('../../Images/volleyball.jpg')"><span class="GameSelect">Volleyball</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Basketball" style="background-image: url('../../Images/basketball.jpg');"><span class="GameSelect">Basketball</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Pool and Billiards" style="background-image: url('../../Images/pool.jpg')"><span class="GameSelect">Pool and Billiards</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Foosball" style="background-image: url('../../Images/foosball.jpg')"><span class="GameSelect">Foosball</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Football" style="background-image: url('../../Images/Football.jpg')"><span class="GameSelect">Football</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=X Box" style="background-image: url('../../Images/xbox.jpg')"><span class="GameSelect">X Box</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Chess" style="background-image: url('../../Images/Chess.jpg')"><span class="GameSelect">Chess</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Air Hockey" style="background-image: url('../../Images/air-hockey.jpg')"><span class="GameSelect">Air Hockey</span></a></p>
+    </div>
+    <div class="col-md-4">
+        <p><a class="btn btn-default divImage" href="/Games/GoToGame?game=Carrom" style="background-image: url('../../Images/Carrom.jpg')"><span class="GameSelect">Carrom</span></a></p>
+    </div>
+</div>
+}
+@if (!string.IsNullOrWhiteSpace(Request.QueryString["errormessage"]))
+{
+    <div style="background-color:red;color:white;font-weight: bold;">Error: @Request.QueryString["errormessage"]</div>
+}
+

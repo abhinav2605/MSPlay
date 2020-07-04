@@ -1,0 +1,175 @@
+﻿@*@model IEnumerable<MSPlay.Models.Booking>*@
+   
+    <div class="SelectedGame">
+        <h2><b>@ViewBag.Game</b></h2>
+        <br />
+        <br />
+        <input type="hidden" value="" id="category" />
+        @if (ViewBag.Game == "Cricket")
+        {
+            <script>
+                $('#category').val('CK');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="ck1" name="ck1">Net 1<br /></a></p>
+            </div>
+
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="ck2" name="ck2">Net 2<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Foosball")
+        {
+            <script>
+                $('#category').val('FSB');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="fsb1" name="fsb1">Floor 1<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="fsb2" name="fsb2">Floor 2<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="fsb3" name="fsb3">Floor 3<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="fsb4" name="fsb4">Floor 4<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Football")
+        {
+            <script>
+                $('#category').val('FB');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="fb1" name="fb1">Ground 1<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Table Tennis")
+        {
+            <script>
+                $('#category').val('TT');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="tt3" name="tt3">3<sup>rd</sup> Floor<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="tt5" name="tt5">5<sup>th</sup> Floor<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="tt6" name="tt6">6<sup>th</sup> Floor<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Basketball")
+        {
+            <script>
+                $('#category').val('BB');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="bb1" name="bb1">Court 1<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Volleyball")
+        {
+            <script>
+                $('#category').val('VB');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="vb1" name="vb1">Court 1<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "X Box")
+        {
+            <script>
+                $('#category').val('XB');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="xb1" name="xb1">Floor 1<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="xb2" name="xb2">Floor 2<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="xb4" name="xb4">Floor 4<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Chess")
+        {
+            <script>
+                $('#category').val('CH');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="ch1" name="ch1">Floor 1<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="ch2" name="ch2">Floor 2<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="ch4" name="ch4">Floor 4<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Carrom")
+        {
+            <script>
+                $('#category').val('CR');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="cr1" name="cr1">Floor 1<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="cr2" name="cr2">Floor 2<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="cr4" name="cr4">Floor 4<br /></a></p>
+            </div>
+        }
+        else if (ViewBag.Game == "Air Hockey")
+        {
+            <script>
+                $('#category').val('AH');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="ah1" name="ah1">Floor 9<br /></a></p>
+            </div>
+        }
+        else
+        {
+            <script>
+                $('#category').val('PL');
+            </script>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="pool1" name="pool1">Floor 1<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="pool2" name="pool2">Floor 2<br /></a></p>
+            </div>
+            <div class="col-md-4 btn-game">
+                <p><a class="btn btn-default" id="pool4" name="pool4">Floor 4<br /></a></p>
+            </div>
+        }
+        <br /><br /><br />
+
+        <button class="bookNow"><span>Book Now </span></button>
+    </div>
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>@ViewBag.Game Booking</h2>
+
+        <div id="ListRenderer"></div>
+
+    </div>
+</div>
+<div id="addModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close1">&times;</span>
+        @if (Model != null) {
+            Html.Partial("~/Views/Games/_getModalData.cshtml");
+                }
+        <div id="ListRenderer1"></div>
+    </div>
+</div>
+

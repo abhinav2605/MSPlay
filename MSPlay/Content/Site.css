@@ -1,0 +1,322 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    /*    background-image: url('../Images/grass.jpg');*/
+    background-image: url('../Images/grass.jpg');
+    background-repeat: repeat;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too longo to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.btn-default {
+    width: 349px;
+    height: 57px;
+    padding-top: 14px;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: darkgray;
+    color: white;
+    text-align: center;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close,.close1 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close, .close1:hover,
+    .close, .close1:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+.bookNow {
+    display: inline-block;
+    border-radius: 4px;
+    background: steelblue;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    left: 44%;
+    vertical-align: middle;
+    position: absolute;
+    top: 50%;
+}
+
+    .bookNow span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .bookNow span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .bookNow:hover span {
+        padding-right: 25px;
+    }
+
+        .bookNow:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+.divImage {
+    object-position: center;
+    color: white;
+    font-weight: bold;
+    height: 198px;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: contain;
+    -webkit-filter: opacity(100%);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 2px solid #333333;
+    -moz-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    -webkit-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    text-shadow: 1px 1px 2px rgba(000,000,000,0.7), 0px 1px 0px rgba(255,255,255,0.4);
+}
+.btn-game > p > a {
+    font-size: 1.5em;
+}
+.btn-game{
+    -moz-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    -webkit-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    text-shadow: 1px 1px 2px rgba(000,000,000,0.7), 0px 1px 0px rgba(255,255,255,0.4);
+}
+.divImage:hover {
+/*    color: darkblue;*/
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.tblBook{
+    margin-top:-109px;
+}
+    .tblBook tr td {
+        width: 200px;
+    }
+.GameSelect {
+    font-size: 2.5em;
+}
+    
+    .tableTennis {
+        background-image: url('../Images/table tennis.jpg');
+    }
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+.jumbotron {
+    background-image: url('../Images/cover.png');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: contain;
+    background-size: cover;
+    width: 99%;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #333333;
+    -moz-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    -webkit-box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
+    text-shadow: 1px 1px 2px rgba(000,000,000,0.7), 0px 1px 0px rgba(255,255,255,0.4);
+}
+
+.WelcomeText {
+    background: linear-gradient(180deg, #dff0d8 -25%, transparent);
+    width: 99%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    text-align: right;
+    padding-inline-end: inherit;
+    text-shadow: 1px 1px #829691;
+}
+.lead {
+    color: black;
+    -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+.detailsPage {
+    background-color: rgba(255,255,255, 0.7);
+    padding-top: 0.5%;
+    padding-right: 0.5%;
+    padding-left: 1.5%;
+    padding-bottom: 0.5%;
+    color: black;
+    border-radius: 17px;
+}
+.body-content > h2 {
+    background: linear-gradient(45deg, #ccc -25%, transparent);
+    height: 40px;
+    padding-top: 2px;
+    width: 104%;
+    border-radius:10px;
+}
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    width: 100%;
+    margin-top: 6px;
+    border-radius: 5px;
+}
+
+    .active, .collapsible:hover {
+        background-color: #555;
+    }
+
+    .collapsible:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+.active:after {
+    content: "\2212";
+}
+
+.content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.equipmentArea {
+    padding-left: 0;
+    margin-left: -15px;
+    margin-top: 6px;
+}
+.equipmentArea tr{
+    width:200%;
+}
+
+input#number {
+    text-align: center;
+    border: none;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 40px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.value-button {
+    display: inline-block;
+    border: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 11px 0;
+    background: #eee;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .value-button:hover {
+        cursor: pointer;
+    }

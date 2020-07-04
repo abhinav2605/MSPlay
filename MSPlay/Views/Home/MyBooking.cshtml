@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MSPlay.Models.Booking>
+
+@{
+    ViewBag.Title = "My Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><b>My Booking</b></h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<div class="detailsPage">
+    <table class="table">
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.SlNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VenueID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.InTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OutTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeAlias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            @*<th></th>*@
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.SlNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VenueID)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.InTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OutTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeAlias)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+</div>
