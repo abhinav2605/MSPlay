@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<MSPlay.Models.VenueDetails>
-   
+
 
 @*@Html.AntiForgeryToken()*@
 
-@{ 
+@{
     IEnumerable<MSPlay.Models.Equipment> equipment = ViewBag.EquipmentList as IEnumerable<MSPlay.Models.Equipment>;
 }
 <h2>Book Now</h2>
@@ -47,19 +47,31 @@
             <button class="collapsible">Select Equipment if required</button>
             <div class="content">
                 <table class="equipmentArea">
-                    @foreach (var item in equipment)
+                    @*@foreach (var item in equipment)
+                        {
+                        <tr>
+                            <td>
+                                <label>@item.Name</label>
+                            </td>
+                            <td>
+                                <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                                <input type="number" id="number" value="0" max="@item.Quantity" />
+                                <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                                <label style="margin-left: 20px;">@item.Quantity</label>
+                            </td>
+                        </tr>
+                        }*@
+                    @foreach (var e in equipment)
                     {
-                    <tr>
-                        <td>
-                            <label>@item.Name</label>
-                        </td>
-                        <td>
-                            <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                            <input type="number" id="number" value="0" />
-                            <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                            <label style="margin-left: 20px;">@item.Quantity</label>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><label>@e.Name</label></td>
+                            <td>
+                                @Html.Hidden("ID" + e.Name)
+                                <div class="value-button" id="decrease" onclick="decreaseValue('@e.Name')" value="Decrease Value">-</div>
+                                <input style="width: 40px; height: 34px;text-align: center;border: 1px solid #ddd;" type="number" id="@(e.Name+"number")" value="0" min="0" max="@e.Quantity" />
+                                <div class="value-button" id="increase" onclick="increaseValue('@e.Name','@e.Quantity')" value="Increase Value">+</div>
+                            </td>
+                        </tr>
                     }
                 </table>
             </div>
@@ -74,21 +86,24 @@
 
 <script type="text/javascript">
 
-    function increaseValue() {
-        var value = parseInt(document.getElementById('number').value, 10);
+    function increaseValue(x, y) {
+        var value = parseInt(document.getElementById(x.concat("number")).value, 10);
         value = isNaN(value) ? 0 : value;
-        value++;
-        document.getElementById('number').value = value;
+        if (value >= y)
+            alert("Sorry but there are no more eqipments available other than the mentioned quantity")
+        else {
+            value++;
+            document.getElementById(x.concat("number")).value = value;
+        }
     }
 
-    function decreaseValue() {
-        var value = parseInt(document.getElementById('number').value, 10);
+    function decreaseValue(x) {
+        var value = parseInt(document.getElementById(x.concat("number")).value, 10);
         value = isNaN(value) ? 0 : value;
         value < 1 ? value = 1 : '';
         value--;
-        document.getElementById('number').value = value;
+        document.getElementById(x.concat("number")).value = value;
     }
-
 
     var coll = document.getElementsByClassName("collapsible");
     var i;
@@ -105,10 +120,23 @@
         });
     }
     function dateValidator() {
-        return $('#inTime').val() >= $('#outTime').val();
+        return $('#inTime').timepicker('getTime').toUTCString() >= $('#outTime').timepicker('getTime').toUTCString();
     }
+
     $("#submit").click(function () {
-        if (dateValidator() != true) {
+        var jData = {};
+        var i = 0;
+        var jsonstr = '{ "checkOut": "5", "checkIn": "luke", "categoryId": "sayaw"}';
+        var str = "";
+        $('table.equipmentArea > tbody > tr').each(function () {
+            ++i;
+            str = str + "'{ \"name\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child('+i+') > td:nth-child(1) > label').textContent + "\"," ;
+            str = str + " \"id\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child(' + i +') > td:nth-child(2) > input[type=hidden]:nth-child(1)').value + "\",";
+            str = str + " \"Quantity\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child(' + i +') > td:nth-child(2) > input[type=number]:nth-child(3)').value + "\"},'";
+        });
+
+        jData.str = str;
+        if (dateValidator() != true & $('#inTime').val() != '' & $('#outTime').val()!='') {
             $.ajax({
                 url: "@(Url.Action("AddBooking", "Games"))",
                 method: 'get',
@@ -117,21 +145,35 @@
                     "inTime": $('#inTime').timepicker('getTime').toUTCString(),
                     "outTime": $('#outTime').timepicker('getTime').toUTCString(),
                     "Alias": $('#Alias').val(),
-                    "ID": $('#ID').val()
+                    "ID": $('#ID').val(),
+                    "equipmentID": JSON.stringify(jData)
                 },
                 success: function (data) {
                     if (data == 'entry added') {
-                        $('#ListRenderer1').empty();
-                        $('#addModal').css("display", "none");
-                        alert("Congratulations! Booking added successfully.");
+                        $.ajax({
+                            url: "@(Url.Action("GetQRCode", "Home"))",
+                            method: 'get',
+                            data: {
+                                "encode": "Your booking id is " + $('#ID').val(),
+                            },
+                            success: function (data) {
+                                $('#ListRenderer1').empty();
+                                $("#ListRenderer1").append("<p style=\"font-size:1.5em\"><b>Congratulations! Booking added successfully.<b></p>")
+                                $("#ListRenderer1").append(data);
+                                $("#ListRenderer1 > img").css("width", "30%")
+                                $('#addModal').css("display", "block");
+                                $('.modal-content').css("width", "50%");
+                            }
+                        });
                     }
                     else
                         alert('Time slot not available!');
                 }
             });
         }
-        else
+        else {
             alert("Choose a valid time range.");
+        }
     });
 </script>
 

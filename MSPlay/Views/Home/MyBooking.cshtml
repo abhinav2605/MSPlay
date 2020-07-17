@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<MSPlay.Models.Booking>
-
+@using QRCoder;
+@using System.Drawing;
+@using System.Drawing.Imaging;
 @{
+
     ViewBag.Title = "My Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2><b>My Booking</b></h2>
 
+@*<img style="width=30px;height:30px" src="@String.Format("data: image/png; base64, {0}", GetQRCode())" />*@
+
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 <div class="detailsPage">
-    <table class="table">
+    <table class="table" id="tblBooking">
         <tr>
             @*<th>
                     @Html.DisplayNameFor(model => model.SlNo)
@@ -31,7 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.EmployeeName)
             </th>
-            @*<th></th>*@
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -55,13 +60,67 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EmployeeName)
                 </td>
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>*@
+                <td>
+                    <img style="width=30px;height:30px" src="@String.Format("data: image/png; base64, {0}", GetQRCode())" />
+                    @*@Html.ActionLink("Show QR", "GetQRCode", routeValues: new { encode = item.InTime }, htmlAttributes: new { id = item.SlNo }) |*@
+                    <a href="" id="@item.SlNo">Show QR</a>
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
             </tr>
         }
 
     </table>
 </div>
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <div id="ListRenderer"><p>kokoko</p></div>
+
+    </div>
+</div>
+@if (ViewBag.image != null)
+{
+    @Html.Partial("~/Views/Home/GetQRCode.cshtml")
+}
+@{
+    string GetQRCode()
+    {
+        byte[] imagebyte;
+        QRCodeGenerator qrGenerator = new QRCodeGenerator();
+        QRCodeData qrCodeData = qrGenerator.CreateQrCode("The text which should be encoded.", QRCodeGenerator.ECCLevel.Q);
+        QRCode qrCode = new QRCode(qrCodeData);
+        System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20);
+
+        using (MemoryStream stream = new MemoryStream())
+        {
+            qrCodeImage.Save(stream, ImageFormat.Png);
+            imagebyte = stream.ToArray();
+        }
+
+        var baseimage = Convert.ToBase64String(imagebyte);
+        return baseimage;
+        //< img src = "@String.Format("data: image / png; base64,{ 0}",GetQRCode())" />
+    }
+    
+}
+<script type="text/javascript">
+    $('#tblBooking > tbody > tr > td:nth-child(5) > a').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "@(Url.Action("GetQRCode", "Home"))",
+            method: 'get',
+            data: {
+                "encode": "Your booking id is "+$(this).attr('id'),
+            },
+            success: function (data) {
+                var modal = document.getElementById("myModal");
+                $("#ListRenderer").empty().append(data);
+                $('.modal-content').css("width","20%");
+                modal.style.display = "block";
+            }
+        });
+    });
+</script>

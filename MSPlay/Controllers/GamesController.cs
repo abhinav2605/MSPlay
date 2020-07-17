@@ -55,6 +55,7 @@ namespace MSPlay.Controllers
             ViewBag.Game = game;
             return View("~/Views/Games/GoToGame.cshtml");
         }
+        [CustomAuthFilter]
         public ActionResult GetModalData(string category)
         {
             VenueDetails objVenue = new VenueDetails();
@@ -128,7 +129,7 @@ namespace MSPlay.Controllers
             }
             return found;
         }
-        public string AddBooking(string VenueID, string inTime, string outTime, string Alias, string ID)
+        public string AddBooking(string VenueID, string inTime, string outTime, string Alias, string ID,string equipmentID)
         {
 
             DateTime inDateTime = DateTime.Parse(inTime);

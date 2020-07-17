@@ -11,6 +11,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Security.Claims;
+using QRCoder;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace MSPlay.Controllers
 {
@@ -69,6 +73,7 @@ namespace MSPlay.Controllers
         [CustomAuthFilter]
         public ActionResult MyBooking()
         {
+            //GetQRCode("rfr");
             Booking objuser = new Booking();
             DataSet ds = new DataSet();
             string name = ClaimsPrincipal.Current.FindFirst("preferred_username").Value;
@@ -102,6 +107,26 @@ namespace MSPlay.Controllers
                     con.Close();
             }
             return View(objuser.GetBookingList);
+        }
+
+        public ActionResult GetQRCode(string encode)
+        {
+            byte[] imagebyte;
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(encode, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+
+            using(MemoryStream stream = new MemoryStream())
+            {
+                qrCodeImage.Save(stream, ImageFormat.Png);
+                imagebyte = stream.ToArray();
+            }
+
+            var baseimage = Convert.ToBase64String(imagebyte);
+            ViewBag.image = baseimage;
+            //< img src = "@String.Format("data: image / png; base64,{ 0}",ViewBag.Image)" />
+            return PartialView();
         }
     }
 }

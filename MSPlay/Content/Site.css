@@ -12,6 +12,16 @@
     padding-right: 15px;
 }
 
+    .body-content > h2 {
+        background: #dff0d8;
+        opacity: 70%;
+        width: fit-content;
+        height: 58px;
+        padding: 5px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        margin-top: 0px;
+    }
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too longo to fit in the left column 
@@ -32,6 +42,7 @@ textarea {
     height: 57px;
     padding-top: 14px;
 }
+
 .footer {
     position: fixed;
     left: 0;
@@ -41,6 +52,7 @@ textarea {
     color: white;
     text-align: center;
 }
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -64,7 +76,7 @@ textarea {
 }
 
 /* The Close Button */
-.close,.close1 {
+.close, .close1 {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -77,10 +89,11 @@ textarea {
         text-decoration: none;
         cursor: pointer;
     }
+
 .bookNow {
     display: inline-block;
     background: steelblue;
-    border-radius:5px;
+    border-radius: 5px;
     background-image: linear-gradient(#09165a,#65a5f9);
     box-shadow: 0px 1px 4px -2px #333;
     border: none;
@@ -96,15 +109,16 @@ textarea {
     position: absolute;
     top: 50%;
 }
-.bookNow:after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: calc(100% - 4px);
-    height: 50%;
-    background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
-}
+
+    .bookNow:after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: calc(100% - 4px);
+        height: 50%;
+        background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    }
 
     .bookNow span {
         cursor: pointer;
@@ -130,6 +144,7 @@ textarea {
             opacity: 1;
             right: 0;
         }
+
 .divImage {
     object-position: center;
     color: white;
@@ -148,37 +163,42 @@ textarea {
     box-shadow: 0px 1px 1px rgba(000,000,000,0.5), inset 1px 2px 0px rgba(255,255,255,0.4);
     text-shadow: 1px 1px 2px rgba(000,000,000,0.7), 0px 1px 0px rgba(255,255,255,0.4);
 }
+
 .btn-game > p > a {
     font-size: 1.5em;
     background-image: linear-gradient(lightgrey,white);
 }
-    .btn-game :after {
-        background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
-    }
+
+.btn-game :after {
+    background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+}
+
 .btn-game {
-    
     text-shadow: 1px 1px 2px rgba(000,000,000,0.7), 0px 1px 0px rgba(255,255,255,0.4);
 }
- 
+
 .divImage:hover {
-/*    color: darkblue;*/
+    /*    color: darkblue;*/
     -webkit-text-stroke: 1px black;
     color: white;
     text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-.tblBook{
-    margin-top:-109px;
+
+.tblBook {
+    margin-top: -109px;
 }
+
     .tblBook tr td {
         width: 200px;
     }
+
 .GameSelect {
     font-size: 2.5em;
 }
-    
-    .tableTennis {
-        background-image: url('../Images/table tennis.jpg');
-    }
+
+.tableTennis {
+    background-image: url('../Images/table tennis.jpg');
+}
 
 input[type=text], select {
     width: 100%;
@@ -204,6 +224,7 @@ input[type=submit] {
     input[type=submit]:hover {
         background-color: #45a049;
     }
+
 .jumbotron {
     background-image: url('../Images/cover.png');
     background-repeat: no-repeat;
@@ -230,12 +251,14 @@ input[type=submit] {
     padding-inline-end: inherit;
     text-shadow: 1px 1px #829691;
 }
+
 .lead {
     color: black;
     -webkit-text-fill-color: black; /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
+
 .detailsPage {
     background-color: rgba(255,255,255, 0.7);
     padding-top: 0.5%;
@@ -245,15 +268,9 @@ input[type=submit] {
     color: black;
     border-radius: 17px;
 }
-.body-content > h2 {
-    background: linear-gradient(45deg, #ccc -25%, transparent);
-    height: 40px;
-    padding-top: 2px;
-    width: 104%;
-    border-radius:10px;
-}
+
 .collapsible {
-    background-color: #5f79ce;
+    background-color: #8a6d3b;
     color: white;
     cursor: pointer;
     padding: 5px;
@@ -284,20 +301,22 @@ input[type=submit] {
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
+
 .equipmentArea {
     padding-left: 0;
     margin-left: -15px;
     margin-top: 6px;
 }
-.equipmentArea tr{
-    width:200%;
-}
+
+    .equipmentArea tr {
+        width: 200%;
+    }
 
 input#number {
     text-align: center;
     border: none;
     border: 1px solid #ddd;
-    border-radius:1px;
+    border-radius: 1px;
     margin: 0px;
     width: 40px;
     height: 34px;
@@ -330,9 +349,10 @@ input[type=number]::-webkit-outer-spin-button {
     .value-button:hover {
         cursor: pointer;
     }
+
 .gameHeading {
     background: #dff0d8; /*linear-gradient(180deg, #dff0d8 -25%, transparent);*/
-    opacity:70%;
+    opacity: 70%;
     width: fit-content;
     height: 58px;
     padding: 5px;

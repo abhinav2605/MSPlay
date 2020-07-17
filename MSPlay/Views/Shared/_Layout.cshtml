@@ -25,7 +25,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Events", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -58,6 +58,9 @@
 </body>
 </html>
 <script type="text/javascript">
+    $(document).ready(function () {
+        //$('#tblBooking').DataTable();
+    });
     var modal = document.getElementById("myModal");
     var modal1 = document.getElementById("addModal");
 
@@ -114,18 +117,21 @@
      });
 
     var addModal = document.getElementById("addModal");
-    $(".bookNow").click(function () {
-        $.ajax({
-            url: "@(Url.Action("GetModalData", "Games"))",
-            method: 'get',
-            data: { "category": $('#category').val() },
-            success: function (data) {
-                $("#ListRenderer1").append(data);
-                addModal.style.display = "block";
-                $('.modal-content').css("margin-top", "76px").css("width","max-content");
-                setTimePicker();
-            }
-        });
+    $(".bookNow").click(function (e) {
+        e.preventDefault();
+        if (!e.detail || e.detail == 1) {
+            $.ajax({
+                url: "@(Url.Action("GetModalData", "Games"))",
+                method: 'get',
+                data: { "category": $('#category').val() },
+                success: function (data) {
+                    $("#ListRenderer1").append(data);
+                    addModal.style.display = "block";
+                    $('.modal-content').css("margin-top", "76px").css("width", "max-content");
+                    setTimePicker();
+                }
+            });
+        }
     });
     $('.close1').click(function () {
         $("#ListRenderer1").empty();
