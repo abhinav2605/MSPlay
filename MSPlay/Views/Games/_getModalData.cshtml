@@ -130,10 +130,12 @@
         var str = "";
         $('table.equipmentArea > tbody > tr').each(function () {
             ++i;
-            str = str + "'{ \"name\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child('+i+') > td:nth-child(1) > label').textContent + "\"," ;
+            str = str + "{ \"name\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child('+i+') > td:nth-child(1) > label').textContent + "\"," ;
             str = str + " \"id\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child(' + i +') > td:nth-child(2) > input[type=hidden]:nth-child(1)').value + "\",";
-            str = str + " \"Quantity\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child(' + i +') > td:nth-child(2) > input[type=number]:nth-child(3)').value + "\"},'";
+            str = str + " \"Quantity\": \"" + document.querySelector('table.equipmentArea > tbody > tr:nth-child(' + i + ') > td:nth-child(2) > input[type=number]:nth-child(3)').value + "\"}";
+            str = "{ \"equipment\":" + str + "},"
         });
+        str = "[" + str + "]";
 
         jData.str = str;
         if (dateValidator() != true & $('#inTime').val() != '' & $('#outTime').val()!='') {

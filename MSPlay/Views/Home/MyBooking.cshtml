@@ -50,6 +50,10 @@
                     </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.InTime)
+                    @if (item.InTime > DateTime.Now)
+                    {
+                        <span class="btn-primary badge m-2">Active</span>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OutTime)
@@ -65,7 +69,7 @@
                     @*@Html.ActionLink("Show QR", "GetQRCode", routeValues: new { encode = item.InTime }, htmlAttributes: new { id = item.SlNo }) |*@
                     <a href="" id="@item.SlNo">Show QR</a>
                     @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                 </td>
             </tr>
         }

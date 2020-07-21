@@ -8,9 +8,16 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using System.Security.Claims;
+using Newtonsoft.Json;
 
 namespace MSPlay.Controllers
 {
+    class EquipmentClass
+    {
+        public string name { get; set; }
+        public string id { get; set; }
+        public string Quantity { get; set; }
+    }
     public class GamesController : Controller
     {
         [CustomAuthFilter]
@@ -129,9 +136,10 @@ namespace MSPlay.Controllers
             }
             return found;
         }
-        public string AddBooking(string VenueID, string inTime, string outTime, string Alias, string ID,string equipmentID)
+        public string AddBooking(string VenueID, string inTime, string outTime, string Alias, string ID,string equipmentObj)
         {
-
+            //List<EquipmentClass> ecObj = JsonConvert.DeserializeObject<List<EquipmentClass>>(equipmentObj);
+            
             DateTime inDateTime = DateTime.Parse(inTime);
             DateTime outDateTime = DateTime.Parse(outTime);
             if (inDateTime < DateTime.Now)
